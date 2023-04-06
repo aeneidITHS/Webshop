@@ -12,4 +12,22 @@ public class Cart {
     public List<CartItem> getCartItems() {
         return cartItems;
     }
+
+    public List<CartItem> removeItemFromCart(int id){
+        if (cartItems.get(id).getAmount()==1){
+            getCartItems().remove(id);
+            return getCartItems();
+        }
+        else {
+            getCartItems().get(id).removeOneFromAmount();
+            return getCartItems();
+        }
+    }
+    public Double sumOfWholeCart(){
+        double temp = 0.0;
+        for(CartItem cartItem : cartItems){
+            temp +=(int) (cartItem.product.getPrice() *cartItem.amount);
+        }
+        return temp;
+    }
 }
