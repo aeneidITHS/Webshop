@@ -1,10 +1,11 @@
-package com.example.webshopping.bussiness;
+package com.example.webshopping.Security;
 
+import com.example.webshopping.Security.Roles;
+import com.example.webshopping.bussiness.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.management.relation.Role;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;

@@ -1,5 +1,6 @@
-package com.example.webshopping.bussiness;
+package com.example.webshopping.Security;
 
+import com.example.webshopping.bussiness.User;
 import com.example.webshopping.data.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

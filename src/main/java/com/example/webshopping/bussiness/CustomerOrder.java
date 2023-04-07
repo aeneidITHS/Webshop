@@ -16,6 +16,11 @@ public class CustomerOrder {
     @ManyToOne
     User user;
 
+    public CustomerOrder(List<CartItem> cartItems, User user) {
+    this.cartItems =cartItems;
+    this.user = user;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }

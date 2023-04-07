@@ -1,5 +1,6 @@
 package com.example.webshopping.bussiness;
 
+import com.example.webshopping.Security.Roles;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -17,10 +18,11 @@ public class User {
     @Column(name = "id",nullable = false)
     private Long id;
     @NotBlank
-    @Email
+    @Column(name = "USERNAME",nullable = false,unique = true)
     private String userName;
     private boolean enabled;
     @NotBlank
+    @Column(name = "PASSWORD",nullable = false)
     private String password;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -81,6 +83,9 @@ public class User {
 
     public boolean isEnabled() {
         return enabled;
+    }
+    public void addOrder(CustomerOrder customerOrder){
+        customerOrders.add(customerOrder);
     }
 
     public void setEnabled(boolean enabled) {

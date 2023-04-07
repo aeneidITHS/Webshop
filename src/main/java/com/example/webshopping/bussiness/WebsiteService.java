@@ -61,11 +61,25 @@ public class WebsiteService {
         return admin;
     }
 
-    public Product addProductToDB(String productName,String productCategory,Double productPrice){
+    public Cart getCart() {
+        return cart;
+    }
+
+    public Product addProductToDB(String productName, String productCategory, Double productPrice){
         product = productRepository.save(new Product(productName,productPrice,productCategory));
         return product;
     }
 
-    public
+    public Cart addProductIntoCart(Long id, int amount){
+        cart.cartItems.add(new CartItem(getProductById(id),amount));
+        return cart;
+    }
+    public void addIntoOrder(){
+        user.addOrder(new CustomerOrder(getCart().getCartItems(),user));
+        user = userRepository.save(user);
 
+    }
+    public void clearCart(){
+        cart = new Cart();
+    }
 }

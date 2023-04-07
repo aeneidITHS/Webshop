@@ -1,4 +1,4 @@
-package com.example.webshopping.bussiness;
+package com.example.webshopping.Security;
 
 import jakarta.persistence.*;
 
