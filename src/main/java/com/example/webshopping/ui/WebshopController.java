@@ -29,4 +29,11 @@ public class WebshopController {
         model.addAttribute("checker",checker);
         return "register";
     }
+
+    
+
+
+
+
+
 }

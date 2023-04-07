@@ -21,6 +21,10 @@ public class CustomerOrder {
     this.user = user;
     }
 
+    public CustomerOrder() {
+
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
