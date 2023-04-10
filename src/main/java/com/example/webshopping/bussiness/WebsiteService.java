@@ -1,6 +1,5 @@
 package com.example.webshopping.bussiness;
 
-import com.example.webshopping.data.AdminRepository;
 import com.example.webshopping.data.OrderRepository;
 import com.example.webshopping.data.UserRepository;
 import com.example.webshopping.data.ProductRepository;
@@ -64,10 +63,13 @@ public class WebsiteService {
         return "User exists";
     }
     public Admin adminLogin(String loginName,String password){
-        List<Admin> adminList = adminRepository.findByNameAndPassword(loginName,password);
-        admin = adminList.get(0);
-        currentUserIsAdmin = true;
-        return admin;
+        if (loginName.equalsIgnoreCase(admin.getName())&&password.equalsIgnoreCase(admin.getPassword())){
+            currentUserIsAdmin = true;
+            return admin;
+        }
+        else {
+            return null;
+        }
     }
 
     public Cart getCart() {

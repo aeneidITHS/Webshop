@@ -4,27 +4,19 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.boot.context.properties.bind.DefaultValue;
 
-@Entity
-@Table(name = "admin")
+
 public class Admin  {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @NotNull
-    private String name;
-    @NotNull
-    private String password;
-
-    private int clearance;
 
 
+    private final String name = "admin" ;
 
-    public void setId(Long id) {
-        this.id = id;
+    private final String password = "admin";
+
+    public String getName() {
+        return name;
     }
 
-    @Id
-    public Long getId() {
-        return id;
+    public String getPassword() {
+        return password;
     }
 }

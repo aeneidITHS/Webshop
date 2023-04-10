@@ -15,10 +15,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class WebshopController {
     @Autowired
     WebsiteService websiteService;
+
     @PostMapping("/login")
     public String login(@RequestParam String user, @RequestParam String password, Model model){
         model.addAttribute(websiteService.Login(user,password));
         model.addAttribute(websiteService.getAllProducts());
+        return "login";
+    }
+    @PostMapping("/adminLogin")
+    public String adminLogin(@RequestParam String user,@RequestParam String password, Model model){
+        model.addAttribute("admin",websiteService.adminLogin(user,password));
         return "login";
     }
     @GetMapping("/register")
