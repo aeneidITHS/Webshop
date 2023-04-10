@@ -16,12 +16,11 @@ public class Cart {
     public List<CartItem> removeItemFromCart(int id){
         if (cartItems.get(id).getAmount()==1){
             getCartItems().remove(id);
-            return getCartItems();
         }
         else {
             getCartItems().get(id).removeOneFromAmount();
-            return getCartItems();
         }
+        return getCartItems();
     }
     public Double sumOfWholeCart(){
         double temp = 0.0;

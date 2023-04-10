@@ -41,6 +41,15 @@ public class WebsiteService {
     public Product getProductById(long id){
         return productRepository.findById(id).get();
     }
+    public List<Product> findProductByCategory(String category){
+        return productRepository.findProductsByCategory(category);
+    }
+    public Product findProductByName(String name){
+        return productRepository.findByName(name);
+    }
+    public Product findProductByPrice(Double price){
+        return productRepository.findByPrice(price);
+    }
     public User Login(String loginName, String password){
         List<User> userList = userRepository.findByEmailAndPassword(loginName,password);
         user = userList.get(0);
@@ -74,12 +83,17 @@ public class WebsiteService {
         cart.cartItems.add(new CartItem(getProductById(id),amount));
         return cart;
     }
-    public void addIntoOrder(){
+    public String addCustomerOrder(){
         user.addOrder(new CustomerOrder(getCart().getCartItems(),user));
         user = userRepository.save(user);
-
+        return "Order has been sent!";
     }
     public void clearCart(){
         cart = new Cart();
+    }
+
+    public String removeFromCart(int id){
+        cart.removeItemFromCart(id);
+        return "removed" + getProductById(id).getName() + "from your cart!";
     }
 }
