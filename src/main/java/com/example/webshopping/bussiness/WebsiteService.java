@@ -18,8 +18,7 @@ public class WebsiteService {
     UserRepository userRepository;
     @Autowired
     OrderRepository orderRepository;
-    @Autowired
-    AdminRepository adminRepository;
+
     boolean exists = false;
     boolean currentUserIsAdmin = false;
     User user;
@@ -50,12 +49,12 @@ public class WebsiteService {
         return productRepository.findByPrice(price);
     }
     public User Login(String loginName, String password){
-        List<User> userList = userRepository.findByEmailAndPassword(loginName,password);
+        List<User> userList = userRepository.findByUserNameAndPassword(loginName,password);
         user = userList.get(0);
         return user;
     }
     public String checkIfUserExist(String loginName, String password){
-        List<User> userList = userRepository.findByEmailAndPassword(loginName,password);
+        List<User> userList = userRepository.findByUserNameAndPassword(loginName,password);
         if (userList.isEmpty()){
             user = userRepository.save(new User(loginName,password));
             return "Created new user!";
