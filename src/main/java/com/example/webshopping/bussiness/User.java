@@ -1,6 +1,5 @@
 package com.example.webshopping.bussiness;
 
-import com.example.webshopping.Security.Roles;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -19,32 +18,25 @@ public class User {
     private Long id;
     @NotBlank
     @Column(name = "USERNAME",nullable = false,unique = true)
-    private String userName;
+    private String username;
     private boolean enabled;
     @NotBlank
     @Column(name = "PASSWORD",nullable = false)
     private String password;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "users_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
-    )
-    private Set<Roles> roles = new HashSet<>();
     @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     private List<CustomerOrder> customerOrders;
 
 
-    public User(String userName, String password){
-        this.userName = userName;
+    public User(String username, String password){
+        this.username = username;
         this.password = password;
         customerOrders = new ArrayList<>();
     }
-    public User(String userName, String password, Long id, List<CustomerOrder> customerOrders){
+    public User(String username, String password, Long id, List<CustomerOrder> customerOrders){
         this.customerOrders = customerOrders;
         this.id = id;
-        this.userName = userName;
+        this.username = username;
         this.password = password;
     }
 
@@ -61,9 +53,6 @@ public class User {
         return id;
     }
 
-    public Set<Roles> getRoles() {
-        return roles;
-    }
 
     public String getPassword() {
         return password;
@@ -74,11 +63,11 @@ public class User {
     }
 
     public String getUserName() {
-        return userName;
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUserName(String username) {
+        this.username = username;
     }
 
     public boolean isEnabled() {

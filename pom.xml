@@ -79,66 +79,6 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-jwt</artifactId>
-            <version>1.1.1.RELEASE</version>
-        </dependency>
-        <dependency>
-            <groupId>com.github.m0uj</groupId>
-            <artifactId>spring-security-jwt</artifactId>
-            <version>1.0-RELEASE</version>
-        </dependency>
-        <dependency>
-            <groupId>eu.fraho.spring</groupId>
-            <artifactId>security-jwt-base</artifactId>
-            <version>5.0.3</version>
-        </dependency>
-        <dependency>
-            <groupId>eu.fraho.spring</groupId>
-            <artifactId>security-jwt-hibernate</artifactId>
-            <version>5.0.3</version>
-        </dependency>
-        <dependency>
-            <groupId>eu.fraho.spring</groupId>
-            <artifactId>security-jwt-redis</artifactId>
-            <version>5.0.3</version>
-        </dependency>
-        <dependency>
-            <groupId>eu.fraho.spring</groupId>
-            <artifactId>security-jwt-memcache</artifactId>
-            <version>5.0.3</version>
-        </dependency>
-        <dependency>
-            <groupId>eu.fraho.spring</groupId>
-            <artifactId>security-jwt-memcache-spring-boot-starter</artifactId>
-            <version>5.0.3</version>
-        </dependency>
-        <dependency>
-            <groupId>eu.fraho.spring</groupId>
-            <artifactId>security-jwt-redis-spring-boot-starter</artifactId>
-            <version>5.0.3</version>
-        </dependency>
-        <dependency>
-            <groupId>eu.fraho.spring</groupId>
-            <artifactId>security-jwt-files-spring-boot-starter</artifactId>
-            <version>5.0.3</version>
-        </dependency>
-        <dependency>
-            <groupId>eu.fraho.spring</groupId>
-            <artifactId>security-jwt-hibernate-spring-boot-starter</artifactId>
-            <version>5.0.3</version>
-        </dependency>
-        <dependency>
-            <groupId>eu.fraho.spring</groupId>
-            <artifactId>security-jwt-base-spring-boot-starter</artifactId>
-            <version>5.0.3</version>
-        </dependency>
-        <dependency>
-            <groupId>eu.fraho.spring</groupId>
-            <artifactId>security-jwt-internal-spring-boot-starter</artifactId>
-            <version>5.0.3</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-core</artifactId>
         </dependency>
     </dependencies>
