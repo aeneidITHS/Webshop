@@ -17,8 +17,8 @@ public class WebshopController {
     WebsiteService websiteService;
 
     @PostMapping("/login")
-    public String login(@RequestParam String user, @RequestParam String password, Model model){
-        model.addAttribute(websiteService.Login(user,password));
+    public String login(@RequestParam String username, @RequestParam String password, Model model){
+        model.addAttribute(websiteService.Login(username,password));
         model.addAttribute(websiteService.getAllProducts());
         return "login";
     }
@@ -59,7 +59,7 @@ public class WebshopController {
     @PostMapping("/placeOrder")
     public String placeOrder(Model model){
         model.addAttribute("customerOrder",websiteService.addCustomerOrder());
-        return "orderplaced";
+        return "orderPlaced";
     }
 
     @PostMapping("/showSearchedItem")
