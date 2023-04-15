@@ -1,6 +1,7 @@
 package com.example.webshopping.ui;
 
 import com.example.webshopping.bussiness.Cart;
+import com.example.webshopping.bussiness.Product;
 import com.example.webshopping.bussiness.WebsiteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.Banner;
@@ -20,7 +21,7 @@ public class WebshopController {
     public String login(@RequestParam String username, @RequestParam String password, Model model){
         model.addAttribute(websiteService.Login(username,password));
         model.addAttribute(websiteService.getAllProducts());
-        return "login";
+        return "homePage";
     }
     @PostMapping("/adminLogin")
     public String adminLogin(@RequestParam String user,@RequestParam String password, Model model){
@@ -33,8 +34,8 @@ public class WebshopController {
     }
     @PostMapping("/register")
     public String register(@RequestParam String username, @RequestParam String password,Model model){
-        String checker = websiteService.checkIfUserExist(username,password);
-        model.addAttribute("checker",checker);
+        String userChecker = websiteService.checkIfUserExist(username,password);
+        model.addAttribute("checkIfUserExist",userChecker);
         return "register";
     }
     @PostMapping("/addCart")
@@ -61,7 +62,12 @@ public class WebshopController {
         model.addAttribute("customerOrder",websiteService.addCustomerOrder());
         return "orderPlaced";
     }
-
+    @GetMapping("/homepage")
+    public String showHomePage(Model m,@RequestParam long id){
+            Product p = websiteService.getProductById(id);
+            m.addAttribute("product",p);
+            return "homePage";
+    }
     @PostMapping("/showSearchedItem")
     public String showSearchedItem(@RequestParam String searchWord,Model model){
 
@@ -84,7 +90,12 @@ public class WebshopController {
         }
         return "searchPage";
     }
-    
+    @PostMapping("/addProduct")
+    public String addProduct(@RequestParam String name, @RequestParam String category, @RequestParam double price, Model m){
+        websiteService.addProductToDB(name,category,price);
+        m.addAttribute("product", new Product());
+        return "addProduct";
+    }
 
 
 
