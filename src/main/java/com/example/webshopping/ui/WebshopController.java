@@ -26,7 +26,7 @@ public class WebshopController {
     @PostMapping("/adminLogin")
     public String adminLogin(@RequestParam String user,@RequestParam String password, Model model){
         model.addAttribute("admin",websiteService.adminLogin(user,password));
-        return "login";
+        return "adminPage";
     }
     @GetMapping("/register")
     public String goingToRegister(Model model){
@@ -86,7 +86,7 @@ public class WebshopController {
             model.addAttribute("searchedItem","No item exists in that category");
         }
         else {
-            model.addAttribute("searcheditem",websiteService.findProductByCategory(searchWord));
+            model.addAttribute("searchedItem",websiteService.findProductByCategory(searchWord));
         }
         return "searchPage";
     }
