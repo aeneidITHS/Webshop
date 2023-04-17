@@ -8,7 +8,6 @@ import java.util.List;
 public class CustomerOrder {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false)
     private Long id;
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     List<CartItem> cartItems;
@@ -29,7 +28,7 @@ public class CustomerOrder {
         this.id = id;
     }
 
-    @Id
+
     public Long getId() {
         return id;
     }

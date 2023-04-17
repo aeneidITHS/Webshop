@@ -9,8 +9,8 @@ import java.util.List;
 import java.util.Optional;
 @Repository
 public interface UserRepository extends JpaRepository<User,Long> {
-    Optional<User>findByUserName(String username);
+    List<User>findByUserName(String userName);
 
-    List<User> findByUserNameAndPassword(String UserName, String Password);
-    User getUserByUserName(@Param("UserName") String userName);
+    List<User> findByUserNameAndPassword(String userName, String password);
+    //User getUserByUserName(@Param("UserName") String userName);
 }
