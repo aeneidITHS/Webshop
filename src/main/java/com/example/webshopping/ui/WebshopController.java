@@ -17,10 +17,14 @@ public class WebshopController {
     @Autowired
     WebsiteService websiteService;
 
+
+
     @PostMapping("/login")
     public String login(@RequestParam String username, @RequestParam String password, Model model){
-        model.addAttribute(websiteService.Login(username,password));
-        model.addAttribute(websiteService.getAllProducts());
+        System.out.println("login1");
+        model.addAttribute("login",websiteService.Login(username,password));
+        System.out.println("login2");
+        model.addAttribute("products",websiteService.getAllProducts());
         return "homePage";
     }
     @PostMapping("/adminLogin")
@@ -30,10 +34,12 @@ public class WebshopController {
     }
     @GetMapping("/register")
     public String goingToRegister(Model model){
+        System.out.println("1");
         return "register";
     }
     @PostMapping("/register")
     public String register(@RequestParam String username, @RequestParam String password,Model model){
+        System.out.println("2");
         String userChecker = websiteService.checkIfUserExist(username,password);
         model.addAttribute("checkIfUserExist",userChecker);
         return "register";

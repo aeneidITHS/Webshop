@@ -10,9 +10,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @SpringBootApplication(exclude = SecurityAutoConfiguration.class)
-@ComponentScan(basePackages ={"com.example.webshopping.bussiness"} )
-@EnableJpaRepositories("com.example.webshopping.data")
-
 public class WebshoppingApplication {
 
     public static void main(String[] args) {
