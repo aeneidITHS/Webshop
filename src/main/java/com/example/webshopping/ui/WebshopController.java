@@ -41,7 +41,9 @@ public class WebshopController {
     public String register(@RequestParam String username, @RequestParam String password,Model model){
         System.out.println("2");
         String userChecker = websiteService.checkIfUserExist(username,password);
+        System.out.println("3");
         model.addAttribute("checkIfUserExist",userChecker);
+        System.out.println("4");
         return "register";
     }
     @PostMapping("/addCart")
