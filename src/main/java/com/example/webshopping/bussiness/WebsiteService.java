@@ -56,7 +56,8 @@ public class WebsiteService {
     public String checkIfUserExist(String loginName, String password){
         List<User> userList = userRepository.findByUserNameAndPassword(loginName,password);
         if (userList.isEmpty()){
-            user = userRepository.save(new User(loginName,password));
+            user = new User(loginName,password);
+            user = userRepository.save(user);
             return "Created new user!";
         }
         return "User exists";
