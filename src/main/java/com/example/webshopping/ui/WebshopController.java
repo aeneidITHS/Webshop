@@ -18,7 +18,10 @@ public class WebshopController {
     WebsiteService websiteService;
 
 
-
+    @GetMapping("/login")
+    public String login(Model model){
+        return "login";
+    }
     @PostMapping("/login")
     public String login(@RequestParam String username, @RequestParam String password, Model model){
         System.out.println("login1");
@@ -27,10 +30,20 @@ public class WebshopController {
         model.addAttribute("products",websiteService.getAllProducts());
         return "homePage";
     }
+    @GetMapping("/adminLogin")
+    public String adminLogin(Model model){
+        return "adminLogin";
+    }
     @PostMapping("/adminLogin")
-    public String adminLogin(@RequestParam String user,@RequestParam String password, Model model){
-        model.addAttribute("admin",websiteService.adminLogin(user,password));
-        return "adminPage";
+    public String adminLogin(@RequestParam String username,@RequestParam String password, Model model){
+        model.addAttribute("admin",websiteService.adminLogin(username,password));
+        if(websiteService.isCurrentUserAdmin()){
+            return "adminPage";
+        }
+        else {
+            model.addAttribute("not admin",websiteService.adminLogin(username,password));
+            return "adminLogin";
+        }
     }
     @GetMapping("/register")
     public String goingToRegister(Model model){
@@ -101,7 +114,7 @@ public class WebshopController {
     @PostMapping("/addProduct")
     public String addProduct(@RequestParam String name, @RequestParam String category, @RequestParam double price, Model m){
         websiteService.addProductToDB(name,category,price);
-        m.addAttribute("product", new Product());
+        m.addAttribute("product", websiteService.findProductByName(name));
         return "addProduct";
     }
 

@@ -13,11 +13,11 @@ public class CustomerOrder {
     List<CartItem> cartItems;
 
     @ManyToOne
-    User user;
+    Person person;
 
-    public CustomerOrder(List<CartItem> cartItems, User user) {
+    public CustomerOrder(List<CartItem> cartItems, Person person) {
     this.cartItems =cartItems;
-    this.user = user;
+    this.person = person;
     }
 
     public CustomerOrder() {
