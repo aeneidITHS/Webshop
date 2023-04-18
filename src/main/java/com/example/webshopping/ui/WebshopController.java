@@ -84,7 +84,7 @@ public class WebshopController {
     @PostMapping("/placeOrder")
     public String placeOrder(Model model){
         model.addAttribute("customerOrder",websiteService.addCustomerOrder());
-        return "orders";
+        return "orderPlaced";
     }
 
     @PostMapping("/showSearchedItem")
@@ -94,9 +94,9 @@ public class WebshopController {
             model.addAttribute("searchedItem","No product exists");
         }
         else {
-            model.addAttribute("searcheditem",websiteService.findProductByName(searchWord));
+            model.addAttribute("searchedItem",websiteService.findProductByName(searchWord));
         }
-        return "searchPage";
+        return "productShop";
     }
     @PostMapping("/showSearchedCategory")
     public String showSearchedCategory(@RequestParam String searchWord,Model model){
@@ -107,7 +107,7 @@ public class WebshopController {
         else {
             model.addAttribute("searchedItem",websiteService.findProductByCategory(searchWord));
         }
-        return "searchPage";
+        return "productShop";
     }
     @GetMapping("/addProduct")
     public String addProduct(Model model){
@@ -123,7 +123,7 @@ public class WebshopController {
     public String orders(Model model){
         model.addAttribute("customerOrders",websiteService.getAllCustomerOrders());
         model.addAttribute("customers",websiteService.getAllPeople());
-        return "orders";
+        return "orderPlaced";
     }
     @PostMapping("/orders")
     public String orders(@RequestParam Integer shippingId, Model model){
@@ -131,7 +131,7 @@ public class WebshopController {
         websiteService.saveOrder(websiteService.getAllCustomerOrders().get(shippingId-1));
         model.addAttribute("customers",websiteService.getAllPeople());
         model.addAttribute("customerOrders",websiteService.getAllCustomerOrders());
-        return "orders";
+        return "orderPlaced";
     }
 
 
