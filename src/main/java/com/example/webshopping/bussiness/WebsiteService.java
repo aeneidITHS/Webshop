@@ -92,6 +92,7 @@ public class WebsiteService {
     public String addCustomerOrder(){
         person.addOrder(new CustomerOrder(getCart().getCartItems(), person));
         person = userRepository.save(person);
+        clearCart();
         return "Order has been sent!";
     }
     public void clearCart(){
@@ -99,6 +100,12 @@ public class WebsiteService {
     }
     public boolean isCurrentUserAdmin() {
         return adminRights;
+    }
+    public List<CustomerOrder> getAllCustomerOrders(){
+        return orderRepository.findAll();
+    }
+    public void saveOrder(CustomerOrder customerOrder){
+        customerOrder = orderRepository.save(customerOrder);
     }
     public String removeFromCart(int id){
         cart.removeItemFromCart(id);

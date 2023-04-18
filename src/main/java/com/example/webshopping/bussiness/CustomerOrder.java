@@ -12,6 +12,15 @@ public class CustomerOrder {
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     List<CartItem> cartItems;
 
+    public boolean isSent() {
+        return sent;
+    }
+
+    public void setSent(boolean sent) {
+        this.sent = sent;
+    }
+
+    private boolean sent;
     @ManyToOne
     Person person;
 
