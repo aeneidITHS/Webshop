@@ -1,10 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
+
+<form action="/showSearchedItem" method="post">
+    Search Bar: <input type="text" name="searchedItem">
+    <input type="submit" th:value="Submit">
+</form>
+
+<form action="/showSearchedCategory" method="post">
+    <select name="searchedItem" onchange="this.form.submit()">
+        <option>--</option>
+        <option th:each="c : ${category}" th:text="${c}" th:value="${c}">
+        </option>
+    </select>
+</form>
+
+<div th:each="p : ${product}">
+    Name: <span th:text="${p.name}"></span>
+    Price: <span th:text="${p.price}"></span>
+    Category: <span th:text="${p.category}"></span>
+    <form action="/addCart" method="post">
+        Amount to Buy: <input type="number" name="amount" value="1">
+        <input type="hidden" name="index" th:value="${p.id}">
+        <input type="submit" value="Buy">
+    </form>
+</div>
+<a href="showCart">Show Cart</a>
+
 
 </body>
 </html>
