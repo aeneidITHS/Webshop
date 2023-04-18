@@ -1,21 +1,20 @@
 package com.example.webshopping.bussiness;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Entity
-public class User {
+public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     @NotBlank
     private String userName;
+
+
 
     @NotBlank
     private String password;
@@ -23,11 +22,11 @@ public class User {
     @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     private List<CustomerOrder> customerOrders;
 
-    public User() {
+    public Person() {
 
     }
 
-    public User(String userName, String password) {
+    public Person(String userName, String password) {
         this.userName = userName;
         this.password = password;
         customerOrders = new ArrayList<>();
@@ -49,16 +48,15 @@ public class User {
     public Long getId() {
         return id;
     }
-
     public void setId(Long id) {
         this.id = id;
-    }
-    public String getPassword() {
-        return password;
     }
 
     public void setPassword(String password) {
         this.password = password;
     }
 
+    public void setCustomerOrders(List<CustomerOrder> customerOrders) {
+        this.customerOrders = customerOrders;
+    }
 }

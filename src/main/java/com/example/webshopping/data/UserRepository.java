@@ -1,16 +1,15 @@
 package com.example.webshopping.data;
 
-import com.example.webshopping.bussiness.User;
+import com.example.webshopping.bussiness.Person;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
-@Repository
-public interface UserRepository extends JpaRepository<User,Long> {
-    List<User>findByUserName(String userName);
 
-    List<User> findByUserNameAndPassword(String userName, String password);
-    //User getUserByUserName(@Param("UserName") String userName);
+@Repository
+public interface UserRepository extends JpaRepository<Person,Long> {
+    List<Person>findByUserName(String userName);
+
+    List<Person> findByUserNameAndPassword(String userName, String password);
+    //UserOld getUserByUserName(@Param("UserName") String userName);
 }
