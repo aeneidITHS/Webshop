@@ -7,18 +7,12 @@ import java.util.List;
 @Entity
 public class CustomerOrder {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     List<CartItem> cartItems;
 
-    public boolean isSent() {
-        return sent;
-    }
 
-    public void setSent(boolean sent) {
-        this.sent = sent;
-    }
 
     private boolean sent;
     @ManyToOne
@@ -32,11 +26,24 @@ public class CustomerOrder {
     public CustomerOrder() {
 
     }
+    public boolean isSent() {
+        return sent;
+    }
 
+    public void setSent(boolean sent) {
+        this.sent = sent;
+    }
     public void setId(Long id) {
         this.id = id;
     }
 
+    public Person getPerson() {
+        return person;
+    }
+
+    public List<CartItem> getCartItems() {
+        return cartItems;
+    }
 
     public Long getId() {
         return id;

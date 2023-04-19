@@ -15,12 +15,12 @@ public class Cart {
 
     public List<CartItem> removeItemFromCart(int id){
         if (cartItems.get(id).getAmount()==1){
-            getCartItems().remove(id);
+            cartItems.remove(id);
         }
         else {
-            getCartItems().get(id).removeOneFromAmount();
+            cartItems.get(id).removeOneFromAmount();
         }
-        return getCartItems();
+        return cartItems;
     }
     public Double sumOfWholeCart(){
         double temp = 0.0;

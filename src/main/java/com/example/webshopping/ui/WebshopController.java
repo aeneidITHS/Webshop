@@ -38,7 +38,7 @@ public class WebshopController {
         model.addAttribute("login",websiteService.Login(username,password));
         System.out.println("login2");
         model.addAttribute("products",websiteService.getAllProducts());
-        return "homePage";
+        return "productShop";
     }
     @GetMapping("/adminLogin")
     public String adminLogin(Model model){
@@ -55,18 +55,12 @@ public class WebshopController {
             return "adminLogin";
         }
     }
-    @GetMapping("/homepage")
-    public String showHomePage(Model m,@RequestParam long id){
-        //Product p = websiteService.getProductById(id);
-        //m.addAttribute("products",);
-        return "homePage";
-    }
 
     @PostMapping("/addCart")
     public String addCart(@RequestParam Long id, @RequestParam int amount, Model model){
         Cart cart = websiteService.addProductIntoCart(id,amount);
         model.addAttribute("cart",cart);
-        return "productShop";
+        return "homePage";
     }
     @GetMapping("/showCart")
     public String showCart(Model model){
@@ -100,12 +94,11 @@ public class WebshopController {
     }
     @PostMapping("/showSearchedCategory")
     public String showSearchedCategory(@RequestParam String searchWord,Model model){
-
         if (websiteService.findProductByCategory(searchWord) ==null){
-            model.addAttribute("searchedItem","No item exists in that category");
+            model.addAttribute("searchedCategory","No item exists in that category");
         }
         else {
-            model.addAttribute("searchedItem",websiteService.findProductByCategory(searchWord));
+            model.addAttribute("searchedCategory",websiteService.findProductByCategory(searchWord));
         }
         return "productShop";
     }
@@ -123,7 +116,7 @@ public class WebshopController {
     public String orders(Model model){
         model.addAttribute("customerOrders",websiteService.getAllCustomerOrders());
         model.addAttribute("customers",websiteService.getAllPeople());
-        return "orderPlaced";
+        return "orders";
     }
     @PostMapping("/orders")
     public String orders(@RequestParam Integer shippingId, Model model){
@@ -131,7 +124,7 @@ public class WebshopController {
         websiteService.saveOrder(websiteService.getAllCustomerOrders().get(shippingId-1));
         model.addAttribute("customers",websiteService.getAllPeople());
         model.addAttribute("customerOrders",websiteService.getAllCustomerOrders());
-        return "orderPlaced";
+        return "orders";
     }
 
 

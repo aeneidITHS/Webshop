@@ -80,20 +80,19 @@ public class WebsiteService {
         return cart;
     }
 
-    public Product addProductToDB(String productName, String productCategory, Double productPrice){
+    public void addProductToDB(String productName, String productCategory, Double productPrice){
         product = productRepository.save(new Product(productName,productPrice,productCategory));
-        return product;
     }
 
     public Cart addProductIntoCart(Long id, int amount){
         cart.cartItems.add(new CartItem(getProductById(id),amount));
         return cart;
     }
-    public String addCustomerOrder(){
+    public List<CustomerOrder> addCustomerOrder(){
         person.addOrder(new CustomerOrder(getCart().getCartItems(), person));
         person = userRepository.save(person);
         clearCart();
-        return "Order has been sent!";
+        return orderRepository.findCustomerOrderById(person.getId());
     }
     public void clearCart(){
         cart = new Cart();
@@ -104,9 +103,11 @@ public class WebsiteService {
     public List<CustomerOrder> getAllCustomerOrders(){
         return orderRepository.findAll();
     }
+
     public void saveOrder(CustomerOrder customerOrder){
         customerOrder = orderRepository.save(customerOrder);
     }
+
     public String removeFromCart(int id){
         cart.removeItemFromCart(id);
         return "removed" + getProductById(id).getName() + "from your cart!";

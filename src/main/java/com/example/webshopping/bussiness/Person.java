@@ -9,7 +9,8 @@ import java.util.List;
 @Entity
 public class Person {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name = "my_entity_gen", sequenceName = "my_entity_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "my_entity_gen")
     private Long id;
     @NotBlank
     private String userName;
