@@ -44,9 +44,6 @@ public class WebsiteService {
     public List<Product> findProductByName(String name){
         return productRepository.findByName(name);
     }
-    public List<Product> findProductByPrice(Double price){
-        return productRepository.findByPrice(price);
-    }
     public Person Login(String loginName, String password){
         List<Person> personList = userRepository.findByUserNameAndPassword(loginName,password);
         person = personList.get(0);
