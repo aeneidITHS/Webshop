@@ -1,5 +1,6 @@
 package com.example.webshopping;
 
+import com.example.webshopping.bussiness.CartItem;
 import com.example.webshopping.bussiness.Product;
 import com.example.webshopping.bussiness.WebsiteService;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,18 +15,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class WebshoppingApplicationTests {
     @Autowired
     WebsiteService websiteService;
-    Product product = Mockito.mock(Product.class);
-    Product product2 = Mockito.mock(Product.class);
-    Product product3 = Mockito.mock(Product.class);
 
     @BeforeEach
     void setUp() {
-        websiteService.addProductToDB(product.getName(), product.getCategory(), product.getPrice());
-        websiteService.addProductToDB(product2.getName(), product2.getCategory(), product2.getPrice());
-        websiteService.addProductToDB(product3.getName(), product3.getCategory(), product3.getPrice());
-        websiteService.addProductIntoCart(1L, 2);
-        websiteService.addProductIntoCart(2L, 4);
-        websiteService.addProductIntoCart(3L, 2);
+        websiteService.addProductIntoCart(1L,1);
+        websiteService.addProductIntoCart(2L,2);
+        websiteService.addProductIntoCart(3L,3);
     }
 
     @Test
@@ -40,9 +35,9 @@ class WebshoppingApplicationTests {
     }
 
     @Test
-    void removeItemFromCartTest() {
+    void removeFromCartTest() {
         websiteService.getCart().removeItemFromCart(0);
-        assertEquals(1, websiteService.getCart().getCartItems().size());
+        assertEquals(2,websiteService.getCart().getCartItems().get(0).getAmount());
     }
 
 

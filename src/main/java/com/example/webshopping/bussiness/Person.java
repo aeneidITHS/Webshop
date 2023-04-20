@@ -57,6 +57,10 @@ public class Person {
         this.password = password;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
     public void setCustomerOrders(List<CustomerOrder> customerOrders) {
         this.customerOrders = customerOrders;
     }

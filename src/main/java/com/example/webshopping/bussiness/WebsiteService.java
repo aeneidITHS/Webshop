@@ -20,22 +20,15 @@ public class WebsiteService {
     UserRepository userRepository;
     @Autowired
     OrderRepository orderRepository;
-
-    boolean exists = false;
-
-
-
     boolean adminRights = false;
     Person person;
     Admin admin;
     Product product;
     Cart cart;
-
     WebsiteService(){
         cart = new Cart();
         admin = new Admin();
     }
-
     public List<Product> getAllProducts(){
         return productRepository.findAll();
     }
@@ -114,7 +107,7 @@ public class WebsiteService {
     }
 
     public void saveOrder(CustomerOrder customerOrder){
-        customerOrder = orderRepository.save(customerOrder);
+        orderRepository.save(customerOrder);
     }
 
     public String removeFromCart(int id){
