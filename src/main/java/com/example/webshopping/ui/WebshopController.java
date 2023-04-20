@@ -16,16 +16,12 @@ public class WebshopController {
 
     @GetMapping("/register")
     public String goingToRegister(Model model){
-        System.out.println("1");
         return "register";
     }
     @PostMapping("/register")
     public String register(@RequestParam String username, @RequestParam String password,Model model){
-        System.out.println("2");
         String userChecker = websiteService.checkIfUserExist(username,password);
-        System.out.println("3");
         model.addAttribute("checkIfUserExist",userChecker);
-        System.out.println("4");
         return "register";
     }
     @GetMapping("/login")
@@ -38,6 +34,7 @@ public class WebshopController {
         model.addAttribute("login",websiteService.Login(username,password));
         System.out.println("login2");
         model.addAttribute("products",websiteService.getAllProducts());
+        model.addAttribute("categories",websiteService.getAllCategories());
         return "productShop";
     }
     @GetMapping("/adminLogin")
@@ -55,12 +52,28 @@ public class WebshopController {
             return "adminLogin";
         }
     }
+    @PostMapping("/showSearchedItem")
+    public String showSearchedItem(@RequestParam String searchWord,Model model){
+        model.addAttribute("searchedItem",websiteService.findProductByName(searchWord));
+        model.addAttribute("categories",websiteService.getAllCategories());
+        model.addAttribute("products",websiteService.getAllProducts());
+        return "productShop";
+    }
+    @PostMapping("/showSearchedCategory")
+    public String showSearchedCategory(@RequestParam String searchWord,Model model){
 
+            model.addAttribute("categories",websiteService.getAllCategories());
+            model.addAttribute("searchedCategory",websiteService.findProductByCategory(searchWord));
+            model.addAttribute("products",websiteService.getAllProducts());
+        return "productShop";
+    }
     @PostMapping("/addCart")
-    public String addCart(@RequestParam Long id, @RequestParam int amount, Model model){
+    public String addCart(@RequestParam("id") Long id, @RequestParam int amount, Model model){
         Cart cart = websiteService.addProductIntoCart(id,amount);
         model.addAttribute("cart",cart);
-        return "homePage";
+        model.addAttribute("products",websiteService.getAllProducts());
+        model.addAttribute("categories",websiteService.getAllCategories());
+        return "productShop";
     }
     @GetMapping("/showCart")
     public String showCart(Model model){
@@ -81,27 +94,7 @@ public class WebshopController {
         return "orderPlaced";
     }
 
-    @PostMapping("/showSearchedItem")
-    public String showSearchedItem(@RequestParam String searchWord,Model model){
 
-        if (websiteService.findProductByName(searchWord) ==null){
-            model.addAttribute("searchedItem","No product exists");
-        }
-        else {
-            model.addAttribute("searchedItem",websiteService.findProductByName(searchWord));
-        }
-        return "productShop";
-    }
-    @PostMapping("/showSearchedCategory")
-    public String showSearchedCategory(@RequestParam String searchWord,Model model){
-        if (websiteService.findProductByCategory(searchWord) ==null){
-            model.addAttribute("searchedCategory","No item exists in that category");
-        }
-        else {
-            model.addAttribute("searchedCategory",websiteService.findProductByCategory(searchWord));
-        }
-        return "productShop";
-    }
     @GetMapping("/addProduct")
     public String addProduct(Model model){
         return "addProduct";

@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
 
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 @Service
 @SessionScope
@@ -57,6 +59,13 @@ public class WebsiteService {
         person = personList.get(0);
         return person;
     }
+    public Set<String> getAllCategories(){
+        Set<String> categories = new TreeSet<>();
+        for (Product p:productRepository.findAll()){
+            categories.add(p.getCategory());
+        }
+        return categories;
+     }
     public String checkIfUserExist(String loginName, String password){
         List<Person> personList = userRepository.findByUserNameAndPassword(loginName,password);
         if (personList.isEmpty()){
