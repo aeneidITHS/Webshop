@@ -13,14 +13,13 @@ public class Cart {
         return cartItems;
     }
 
-    public List<CartItem> removeItemFromCart(int id){
+    public void removeItemFromCart(int id){
         if (cartItems.get(id).getAmount()==1){
             cartItems.remove(id);
         }
         else {
             cartItems.get(id).removeOneFromAmount();
         }
-        return cartItems;
     }
     public Double sumOfWholeCart(){
         double temp = 0.0;
