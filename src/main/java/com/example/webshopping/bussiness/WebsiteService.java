@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
 
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 @Service
 @SessionScope
@@ -18,22 +20,19 @@ public class WebsiteService {
     UserRepository userRepository;
     @Autowired
     OrderRepository orderRepository;
-
-    boolean exists = false;
-    boolean currentUserIsAdmin = false;
-    User user;
+    boolean adminRights = false;
+    Person person;
     Admin admin;
     Product product;
     Cart cart;
-
     WebsiteService(){
         cart = new Cart();
+        admin = new Admin();
     }
-
     public List<Product> getAllProducts(){
         return productRepository.findAll();
     }
-    public List<User> getAllPeople(){
+    public List<Person> getAllPeople(){
        return userRepository.findAll();
     }
     public Product getProductById(long id){
@@ -42,33 +41,37 @@ public class WebsiteService {
     public List<Product> findProductByCategory(String category){
         return productRepository.findProductsByCategory(category);
     }
-    public Product findProductByName(String name){
+    public List<Product> findProductByName(String name){
         return productRepository.findByName(name);
     }
-    public Product findProductByPrice(Double price){
-        return productRepository.findByPrice(price);
+    public Person Login(String loginName, String password){
+        List<Person> personList = userRepository.findByUserNameAndPassword(loginName,password);
+        person = personList.get(0);
+        return person;
     }
-    public User Login(String loginName, String password){
-        List<User> userList = userRepository.findByUserNameAndPassword(loginName,password);
-        user = userList.get(0);
-        return user;
-    }
-    public String checkIfUserExist(String loginName, String password){
-        List<User> userList = userRepository.findByUserNameAndPassword(loginName,password);
-        if (userList.isEmpty()){
-            user = new User(loginName,password);
-            user = userRepository.save(user);
-            return "Created new user!";
+    public Set<String> getAllCategories(){
+        Set<String> categories = new TreeSet<>();
+        for (Product p:productRepository.findAll()){
+            categories.add(p.getCategory());
         }
-        return "User exists";
+        return categories;
+     }
+    public String checkIfUserExist(String loginName, String password){
+        List<Person> personList = userRepository.findByUserNameAndPassword(loginName,password);
+        if (personList.isEmpty()){
+            person = new Person(loginName,password);
+            person = userRepository.save(person);
+            return "Created new person!";
+        }
+        return "user exists";
     }
-    public Admin adminLogin(String loginName,String password){
+    public String adminLogin(String loginName,String password){
         if (loginName.equalsIgnoreCase(admin.getName())&&password.equalsIgnoreCase(admin.getPassword())){
-            currentUserIsAdmin = true;
-            return admin;
+            adminRights = true;
+            return "Welcome!";
         }
         else {
-            return null;
+            return "Incorrect username or password!";
         }
     }
 
@@ -76,22 +79,32 @@ public class WebsiteService {
         return cart;
     }
 
-    public Product addProductToDB(String productName, String productCategory, Double productPrice){
+    public void addProductToDB(String productName, String productCategory, Double productPrice){
         product = productRepository.save(new Product(productName,productPrice,productCategory));
-        return product;
     }
 
     public Cart addProductIntoCart(Long id, int amount){
         cart.cartItems.add(new CartItem(getProductById(id),amount));
         return cart;
     }
-    public String addCustomerOrder(){
-        user.addOrder(new CustomerOrder(getCart().getCartItems(),user));
-        user = userRepository.save(user);
-        return "Order has been sent!";
+    public List<CustomerOrder> addCustomerOrder(){
+        person.addOrder(new CustomerOrder(getCart().getCartItems(), person));
+        person = userRepository.save(person);
+        clearCart();
+        return orderRepository.findCustomerOrderById(person.getId());
     }
     public void clearCart(){
         cart = new Cart();
+    }
+    public boolean isCurrentUserAdmin() {
+        return adminRights;
+    }
+    public List<CustomerOrder> getAllCustomerOrders(){
+        return orderRepository.findAll();
+    }
+
+    public void saveOrder(CustomerOrder customerOrder){
+        orderRepository.save(customerOrder);
     }
 
     public String removeFromCart(int id){

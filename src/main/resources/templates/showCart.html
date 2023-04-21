@@ -1,10 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-
+Inside the cart
+<div th:each="c , i : ${cart.cartItems}">
+    Name:
+    <td th:text="${c.product.name}"></td>
+    Price:
+    <td th:text="${c.product.price}"></td>
+    Amount:
+    <td th:text="${c.amount}"></td>
+    <form action="/removeFromCart" method="post">
+        <input type="hidden" name="id" th:value="${i.index}">
+        <input name="removeItem" type="submit" value="Remove Product">
+    </form>
+</div>
+Amount to Pay:
+<td th:text="${amount}"></td>
+<form action="/placeOrder" method="post">
+    <input name="placeOrder" type="submit" value="Place Order">
+</form>
 </body>
 </html>
