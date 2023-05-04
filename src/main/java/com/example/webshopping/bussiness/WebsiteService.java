@@ -35,6 +35,10 @@ public class WebsiteService {
     public List<Person> getAllPeople(){
        return userRepository.findAll();
     }
+    public List<Product> deleteProductById(Integer id){
+        productRepository.deleteProductById(Long.valueOf(id));
+        return productRepository.findAll();
+    }
     public Product getProductById(long id){
         return productRepository.findById(id).get();
     }
@@ -79,10 +83,16 @@ public class WebsiteService {
         return cart;
     }
 
-    public void addProductToDB(String productName, String productCategory, Double productPrice){
+    public Product addProductToDB(String productName, String productCategory, Double productPrice){
         product = productRepository.save(new Product(productName,productPrice,productCategory));
+        return product;
     }
-
+    public Product updateProductPrice(Integer id, Double price){
+        product = productRepository.findById(Long.valueOf(id)).get();
+        product.setPrice(price);
+        product = productRepository.save(product);
+        return product;
+    }
     public Cart addProductIntoCart(Long id, int amount){
         cart.cartItems.add(new CartItem(getProductById(id),amount));
         return cart;

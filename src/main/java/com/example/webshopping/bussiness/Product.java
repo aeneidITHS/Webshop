@@ -34,6 +34,10 @@ public class Product {
         return price;
     }
 
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
     public Product(String name, Double price, String category) {
         this.name = name;
         this.price = price;
