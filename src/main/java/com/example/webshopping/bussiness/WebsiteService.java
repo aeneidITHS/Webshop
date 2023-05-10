@@ -83,9 +83,8 @@ public class WebsiteService {
         return cart;
     }
 
-    public Product addProductToDB(String productName, String productCategory, Double productPrice){
+    public void addProductToDB(String productName, String productCategory, Double productPrice){
         product = productRepository.save(new Product(productName,productPrice,productCategory));
-        return product;
     }
     public Product updateProductPrice(Integer id, Double price){
         product = productRepository.findById(Long.valueOf(id)).get();
