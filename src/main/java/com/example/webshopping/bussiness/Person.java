@@ -1,6 +1,7 @@
 package com.example.webshopping.bussiness;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "my_entity_gen")
     private Long id;
     @NotBlank
+    @Email
     private String userName;
 
 

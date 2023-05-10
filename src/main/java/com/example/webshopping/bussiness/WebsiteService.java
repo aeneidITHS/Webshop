@@ -36,7 +36,7 @@ public class WebsiteService {
        return userRepository.findAll();
     }
     public List<Product> deleteProductById(Integer id){
-        productRepository.deleteProductById(Long.valueOf(id));
+        productRepository.deleteById(id.longValue());
         return productRepository.findAll();
     }
     public Product getProductById(long id){
